@@ -4,9 +4,23 @@ using namespace sf;
 
 int main()
 {
+    // CREATE MAIN VIEW
+    //Screen Resolution
+    Vector2f resolution;
+    resolution.x = VideoMode::getDesktopMode().width;
+    resolution.y = VideoMode::getDesktopMode().height;
     // Create Window
-    VideoMode vm(1920, 1080);
-    RenderWindow window(vm, "SFML Window",Style::Fullscreen);
+    VideoMode vm(resolution.x, resolution.y);
+    RenderWindow window(vm, "World of Chaos",Style::Fullscreen);
+    //Create Main View
+    View mainView(sf::FloatRect(0,0,resolution.x,resolution.y));
+
+    //Mouse world coordinates
+    Vector2f mouseWorld;
+    //Mouse screen coordinat4es
+    Vector2f mouseScreen;
+
+    
     //Create object
     CircleShape shape(50.f);
     shape.setFillColor(Color::Green);
