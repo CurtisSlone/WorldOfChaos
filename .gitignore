@@ -2,3 +2,5 @@
 *.o
 #Ignore executable
 bin/*
+#Ignore VSCode
+.vscode/*
