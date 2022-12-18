@@ -14,12 +14,15 @@ int main()
     RenderWindow window(vm, "World of Chaos",Style::Fullscreen);
     //Create Main View
     View mainView(sf::FloatRect(0,0,resolution.x,resolution.y));
+    float bottomBorder = (resolution.y - (resolution.y*.2));
+    float topBorder = (resolution.y*.2);
+    float rightBorder = (resolution.x - (resolution.x*.2));
+    float leftBorder = (resolution.x*.2);
 
     //Mouse world coordinates
     Vector2f mouseWorld;
     //Mouse screen coordinates
     Vector2f mouseScreen;
-
     
     //Create object
     CircleShape shape(50.f);
@@ -61,26 +64,36 @@ int main()
 
         //Conditional View Move
         // Move view down
-        if(shape.getPosition().y >= (mainView.getSize().y - (mainView.getSize().y *.2)))
+        if(shape.getPosition().y == bottomBorder)
         {
+            bottomBorder+=1;
+            topBorder+=1;
             mainView.move(0,1.0f);
-            mainView.move(0,0);        }
+            mainView.move(0,0);        
+            
+        }
         // Move view up
-        if(shape.getPosition().y <= (mainView.getSize().y *.2))
+        if(shape.getPosition().y == topBorder)
         {
+            topBorder-=1;
+            bottomBorder-=1;
             mainView.move(0,-1.0f);
             mainView.move(0,0); 
 
         }
         // Move view right
-        if(shape.getPosition().x >= (mainView.getSize().x - (mainView.getSize().x *.2)))
+        if(shape.getPosition().x == rightBorder)
         {
+            rightBorder+=1;
+            leftBorder+=1;
             mainView.move(1.0f,0);
             mainView.move(0,0); 
         }
         // Move view up
-        if(shape.getPosition().x <= (mainView.getSize().x*.2))
+        if(shape.getPosition().x == leftBorder)
         {
+            leftBorder-=1;
+            rightBorder-=1;
             mainView.move(-1.0f,0);
             mainView.move(0,0); 
         }
