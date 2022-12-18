@@ -1,4 +1,4 @@
 # Ignore Object files
 *.o
 #Ignore executable
-Map
+bin/*
