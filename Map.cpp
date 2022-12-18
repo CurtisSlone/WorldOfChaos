@@ -17,7 +17,7 @@ int main()
 
     //Mouse world coordinates
     Vector2f mouseWorld;
-    //Mouse screen coordinat4es
+    //Mouse screen coordinates
     Vector2f mouseScreen;
 
     
@@ -59,8 +59,46 @@ int main()
             shape.setPosition(shape.getPosition().x + 1,shape.getPosition().y);
         }
 
+        //Conditional View Move
+        // Move view down
+        if(shape.getPosition().y >= (mainView.getSize().y - (mainView.getSize().y *.2)))
+        {
+            mainView.move(0,1.0f);
+            mainView.move(0,0);        }
+        // Move view up
+        if(shape.getPosition().y <= (mainView.getSize().y *.2))
+        {
+            mainView.move(0,-1.0f);
+            mainView.move(0,0); 
+
+        }
+        // Move view right
+        if(shape.getPosition().x >= (mainView.getSize().x - (mainView.getSize().x *.2)))
+        {
+            mainView.move(1.0f,0);
+            mainView.move(0,0); 
+        }
+        // Move view up
+        if(shape.getPosition().x <= (mainView.getSize().x*.2))
+        {
+            mainView.move(-1.0f,0);
+            mainView.move(0,0); 
+        }
+
+        ///Move view left
+        if(Keyboard::isKeyPressed(Keyboard::Z))
+        {
+            
+        }
+        //Move view right
+        if(Keyboard::isKeyPressed(Keyboard::X))
+        {
+            mainView.move(-1.f,0);
+        }
+
         // Draw
         window.clear();
+        window.setView(mainView);
         window.draw(bgSprite);
         window.draw(shape);
         window.display();
