@@ -1,0 +1,11 @@
+Walk up
+row 8
+
+Walk Left
+row 9
+
+walk down
+row 10
+
+walk right 
+row 11

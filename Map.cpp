@@ -24,96 +24,98 @@ int main()
     //Mouse screen coordinates
     Vector2f mouseScreen;
     
-    //Create object
-    CircleShape shape(50.f);
-    shape.setFillColor(Color::Green);
-    //Set Shape position
-    shape.setPosition(500,500);
+    
     //Create a texture for background
     Texture bg;
     bg.loadFromFile("graphics/bg.png");
     Sprite bgSprite;
     bgSprite.setTexture(bg);
     bgSprite.setPosition(0,0);
+
+    //Player
+    Texture t_player;
+    t_player.loadFromFile("graphics/spritesheet.png");
+    Sprite player(t_player, sf::IntRect(0,0,50,70));
+    player.setPosition(0,0);
+
     
+    //Clock
+    Clock clock;
+  
 
     //Main Loop
     while(window.isOpen())
     {
-        // Press Escape to Exit
-        if (Keyboard::isKeyPressed(Keyboard::Escape))
+        //Get time delta
+        Time dt = clock.restart();
+        //Event
+        Event event;
+        // Poll event
+        while (window.pollEvent(event))
         {
-            window.close();
-        }
-        if(Keyboard::isKeyPressed(Keyboard::Up))
-        {
-            shape.setPosition(shape.getPosition().x,shape.getPosition().y - 1);
-        }
-        if(Keyboard::isKeyPressed(Keyboard::Down))
-        {
-            shape.setPosition(shape.getPosition().x,shape.getPosition().y + 1);
-        }
-        if(Keyboard::isKeyPressed(Keyboard::Left))
-        {
-            shape.setPosition(shape.getPosition().x - 1,shape.getPosition().y);
-        }
-        if(Keyboard::isKeyPressed(Keyboard::Right))
-        {
-            shape.setPosition(shape.getPosition().x + 1,shape.getPosition().y);
+            //Key Switch
+			switch (event.key.code)
+			{
+				case Keyboard::Escape:
+                    window.close();
+                    break;
+                case Keyboard::Up:
+                    player.setPosition(player.getPosition().x,player.getPosition().y - 4);
+                    break;
+                case Keyboard::Down:
+                    player.setPosition(player.getPosition().x,player.getPosition().y + 4);
+                    break;
+                case Keyboard::Left:
+                    player.setPosition(player.getPosition().x - 4,player.getPosition().y);
+                    break;
+                case Keyboard::Right:
+                    player.setPosition(player.getPosition().x + 4,player.getPosition().y);
+                    break;
+			}
         }
 
+    
         //Conditional View Move
         // Move view down
-        if(shape.getPosition().y == bottomBorder)
+        if(player.getPosition().y >= bottomBorder)
         {
-            bottomBorder+=1;
-            topBorder+=1;
-            mainView.move(0,1.0f);
+            bottomBorder+=4;
+            topBorder+=4;
+            mainView.move(0,4.0f);
             mainView.move(0,0);        
             
         }
         // Move view up
-        if(shape.getPosition().y == topBorder)
+        if(player.getPosition().y <= topBorder)
         {
-            topBorder-=1;
-            bottomBorder-=1;
-            mainView.move(0,-1.0f);
+            topBorder-=4;
+            bottomBorder-=4;
+            mainView.move(0,-4.0f);
             mainView.move(0,0); 
 
         }
         // Move view right
-        if(shape.getPosition().x == rightBorder)
+        if(player.getPosition().x == rightBorder)
         {
-            rightBorder+=1;
-            leftBorder+=1;
-            mainView.move(1.0f,0);
+            rightBorder+=4;
+            leftBorder+=4;
+            mainView.move(4.0f,0);
             mainView.move(0,0); 
         }
         // Move view up
-        if(shape.getPosition().x == leftBorder)
+        if(player.getPosition().x == leftBorder)
         {
-            leftBorder-=1;
-            rightBorder-=1;
-            mainView.move(-1.0f,0);
+            leftBorder-=4;
+            rightBorder-=4;
+            mainView.move(-4.0f,0);
             mainView.move(0,0); 
-        }
-
-        ///Move view left
-        if(Keyboard::isKeyPressed(Keyboard::Z))
-        {
-            
-        }
-        //Move view right
-        if(Keyboard::isKeyPressed(Keyboard::X))
-        {
-            mainView.move(-1.f,0);
         }
 
         // Draw
         window.clear();
         window.setView(mainView);
         window.draw(bgSprite);
-        window.draw(shape);
+        window.draw(player);
         window.display();
     }
 
