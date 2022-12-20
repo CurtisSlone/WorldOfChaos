@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include "source/inc/Direction.h"
 using namespace sf;
 
 int main()
@@ -35,8 +35,8 @@ int main()
     //Player
     Texture t_player;
     t_player.loadFromFile("graphics/spritesheet.png");
-    Sprite player(t_player, sf::IntRect(0,0,50,70));
-    player.setPosition(0,0);
+    Sprite player(t_player, sf::IntRect(0,585,65,65));
+    player.setPosition(resolution.x/2,resolution.y/2);
 
     
     //Clock
