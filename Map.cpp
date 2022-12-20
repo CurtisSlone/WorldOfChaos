@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "source/inc/Direction.h"
 using namespace sf;
 
 int main()

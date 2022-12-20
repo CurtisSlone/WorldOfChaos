@@ -1,1 +1,1 @@
-enum class Direction { Up = 0, Right, Down, Left};
+enum class Direction { Up = 8, Left, Down, Right};
