@@ -1,12 +1,18 @@
 CC = g++
 CFLAGS = -c
 OFLAGS= -o
-TARGET = Map
-CLINKERS = -lsfml-graphics -lsfml-window -lsfml-system
+OBJFILES = Animation.o Player.o main.o
+TARGET = main
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
+all: $(TARGET)
 
 $(TARGET): $(TARGET).cpp
-	#rm bin/$(TARGET) $(TARGET).o
-	$(CC) $(CFLAGS) $(TARGET).cpp 
-	$(CC) $(TARGET).o $(OFLAGS) bin/$(TARGET) $(CLINKERS)
+	$(CC) $(CFLAGS) $(TARGET).cpp
+	$(CC) $(CFLAGS) source/Animation.cpp
+	$(CC) $(CFLAGS) source/Player.cpp
+	$(CC) $(OBJFILES) $(OFLAGS) bin/$(TARGET) $(LDFLAGS)
 	chmod +x bin/$(TARGET)
+
+clean: 
+	rm bin/$(TARGET) $(OBJFILES)

@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "source/inc/Player.h"
+
 using namespace sf;
 
 int main()
@@ -32,10 +34,7 @@ int main()
     bgSprite.setPosition(0,0);
 
     //Player
-    Texture t_player;
-    t_player.loadFromFile("graphics/spritesheet.png");
-    Sprite player(t_player, sf::IntRect(0,585,65,65));
-    player.setPosition(resolution.x/2,resolution.y/2);
+    Player player(resolution);
 
     
     //Clock
@@ -59,16 +58,16 @@ int main()
                     window.close();
                     break;
                 case Keyboard::Up:
-                    player.setPosition(player.getPosition().x,player.getPosition().y - 4);
+                    
                     break;
                 case Keyboard::Down:
-                    player.setPosition(player.getPosition().x,player.getPosition().y + 4);
+                    
                     break;
                 case Keyboard::Left:
-                    player.setPosition(player.getPosition().x - 4,player.getPosition().y);
+                    
                     break;
                 case Keyboard::Right:
-                    player.setPosition(player.getPosition().x + 4,player.getPosition().y);
+                    
                     break;
 			}
         }
@@ -114,7 +113,7 @@ int main()
         window.clear();
         window.setView(mainView);
         window.draw(bgSprite);
-        window.draw(player);
+        window.draw(player.getSprite());
         window.display();
     }
 
