@@ -1,18 +1,13 @@
 #include "inc/Player.h"
+#include "inc/Animation.h"
 
 //Constructor
-Player::Player() {
+Player::Player(Vector2f resolution) {
     p_texture.loadFromFile("../graphics/spritesheet.png");
     p_sprite.setTexture(p_texture);
-    
-}
-
-//Spawn player
-void Player::spawn(Vector2f resolution)
-{
-    m_Position.x = resolution.x/2;
-    m_Position.y = resolution.y/2;
-
+	p_sprite.setTextureRect(IntRect(0,0,65,65));
+	m_position.x = resolution.x/2;
+    m_position.y = resolution.y/2;
 }
 
 //Return Sprite
@@ -61,4 +56,9 @@ void Player::stopUp()
 void Player::stopDown()
 {
 	m_DownPressed = false;
+}
+
+Vector2f Player::getPosition()
+{
+	return m_position;
 }

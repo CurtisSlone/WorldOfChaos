@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Direction.h"
 #include <vector>
 
 using namespace sf;
@@ -12,12 +11,7 @@ class Player
         Texture p_texture;
         Sprite p_sprite;
         //Player Position
-        Vector2f m_Position;
-        //Player Dimensions
-        int p_Width;
-        int p_Height;
-        //Walking Frames
-        int p_NumWalkingFrames;
+        Vector2f m_position;
         //Is Player Moving
         bool m_Moving;
         //Player direction
@@ -73,28 +67,23 @@ class Player
 
 
     public:
-        Player();
-        //Spawn
-        void spawn(Vector2f resolution);
+        Player(Vector2f resolution);
         //Pass sprite to main
         Sprite getSprite();
+
         // The next four functions move the player
         void moveLeft();
-
         void moveRight();
-
         void moveUp();
 
         void moveDown();
 
         // Stop the player moving in a specific direction
         void stopLeft();
-
         void stopRight();
-
         void stopUp();
-
         void stopDown();
-
+        //Return Position of Player
+        Vector2f getPosition();
 
 };
