@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Animation.h"
 
 using namespace sf;
 
@@ -19,6 +20,7 @@ class Player
         bool m_DownPressed;
         bool m_LeftPressed;
         bool m_RightPressed;
+        //Animation Vectors
         std::vector<IntRect> walkingRight {
             {0,715,65,65},
             {65,715,65,65},
@@ -64,19 +66,17 @@ class Player
             {510,650,65,65}
 
         };
-
-
+        
     public:
         Player(Vector2f resolution);
         //Pass sprite to main
         Sprite getSprite();
 
         // The next four functions move the player
-        void moveLeft();
-        void moveRight();
-        void moveUp();
-
-        void moveDown();
+        void moveLeft(float dt);
+        void moveRight(float dt);
+        void moveUp(float dt);
+        void moveDown(float dt);
 
         // Stop the player moving in a specific direction
         void stopLeft();

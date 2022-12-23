@@ -1,10 +1,19 @@
 #include "inc/Animation.h"
 
-void Animation::update(float dt) {
-  currentFrameTime += dt;
-  // TODO: take `cycles` into account.
-  while (currentFrameTime >= frameTime) {
-    currentFrameTime -= frameTime;
-    currentFrame = (currentFrame + 1) % frames.size();
-  }
+//Reset
+void Animation::reset ()
+{
+    currentFrame = 0;
+    frameTime = 0;
+}
+//Update
+void Animation::updateFrame(float dt)
+{
+
+}
+
+//return frame
+IntRect Animation::getCurrentFrame()
+{
+    return currentSequence[currentFrame];
 }

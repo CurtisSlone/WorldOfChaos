@@ -1,5 +1,5 @@
 #include "inc/Player.h"
-#include "inc/Animation.h"
+
 
 //Constructor
 Player::Player(Vector2f resolution) {
@@ -9,6 +9,7 @@ Player::Player(Vector2f resolution) {
 	m_position.x = resolution.x/2;
     m_position.y = resolution.y/2;
 	p_sprite.setPosition(m_position.x,m_position.y);
+	
 }
 
 //Return Sprite
@@ -19,24 +20,29 @@ Sprite Player::getSprite()
 
 //Move
 
-void Player::moveLeft()
+void Player::moveLeft(float dt)
 {
 	m_LeftPressed = true;
+	p_sprite.setPosition(p_sprite.getPosition().x - 4,p_sprite.getPosition().y);
+	
 }
 
-void Player::moveRight()
+void Player::moveRight(float dt)
 {
 	m_RightPressed = true;
+	p_sprite.setPosition(p_sprite.getPosition().x + 4,p_sprite.getPosition().y);
 }
 
-void Player::moveUp()
+void Player::moveUp(float dt)
 {
 	m_UpPressed = true;
+	p_sprite.setPosition(p_sprite.getPosition().x,p_sprite.getPosition().y - 4);
 }
 
-void Player::moveDown()
+void Player::moveDown(float dt)
 {
 	m_DownPressed = true;
+	p_sprite.setPosition(p_sprite.getPosition().x,p_sprite.getPosition().y + 4);
 }
 
 void Player::stopLeft()

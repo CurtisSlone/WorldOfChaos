@@ -58,16 +58,16 @@ int main()
                     window.close();
                     break;
                 case Keyboard::Up:
-                    
+                    player.moveUp(dt.asSeconds());
                     break;
                 case Keyboard::Down:
-                    
+                    player.moveDown(dt.asSeconds());
                     break;
                 case Keyboard::Left:
-                    
+                    player.moveLeft(dt.asSeconds());
                     break;
                 case Keyboard::Right:
-                    
+                    player.moveRight(dt.asSeconds());
                     break;
 			}
         }
