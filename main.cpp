@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "source/inc/Player.h"
+#include "source/inc/Map.h"
+#include "source/inc/GameView.h"
 
 using namespace sf;
 
 int main()
 {
-    // CREATE MAIN VIEW
     //Screen Resolution
     Vector2f resolution;
     resolution.x = VideoMode::getDesktopMode().width;
@@ -13,25 +14,12 @@ int main()
     // Create Window
     VideoMode vm(resolution.x, resolution.y);
     RenderWindow window(vm, "World of Chaos",Style::Fullscreen);
+
     //Create Main View
-    View mainView(sf::FloatRect(0,0,resolution.x,resolution.y));
-    float bottomBorder = (resolution.y - (resolution.y*.2));
-    float topBorder = (resolution.y*.2);
-    float rightBorder = (resolution.x - (resolution.x*.2));
-    float leftBorder = (resolution.x*.2);
-    
-    //Mouse world coordinates
-    Vector2f mouseWorld;
-    //Mouse screen coordinates
-    Vector2f mouseScreen;
-    
-    
-    //Create a texture for background
-    Texture bg;
-    bg.loadFromFile("graphics/bg.png");
-    Sprite bgSprite;
-    bgSprite.setTexture(bg);
-    bgSprite.setPosition(0,0);
+    GameView gameView(resolution);
+
+    //Draw Map
+    Map map;
 
     //Clock
     Clock clock;
@@ -39,10 +27,6 @@ int main()
 
     //Player
     Player player(resolution);
-
-    
-    
-  
 
     //Main Loop
     while(window.isOpen())
@@ -114,8 +98,8 @@ int main()
 
         // Draw
         window.clear();
-        window.setView(mainView);
-        window.draw(bgSprite);
+        window.setView(gameView.getView());
+        window.draw(map.getMap());
         window.draw(player.getSprite());
         window.display();
     }

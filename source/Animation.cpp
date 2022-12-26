@@ -1,5 +1,4 @@
 #include "inc/Animation.h"
-#include <iostream>
 //Reset
 void Animation::reset ()
 {

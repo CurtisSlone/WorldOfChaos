@@ -26,7 +26,7 @@ class Player
             m_size(Vector2i(64,64)),
             m_frame(Vector2i(0,650)),
             m_currentFrame(IntRect(m_frame,m_size)),
-            animate(.1,9),
+            animate(.075,9),
             m_position(Vector2f(resolution.x/2,resolution.y/2))
             {
                 p_texture.loadFromFile("./graphics/spritesheet.png");

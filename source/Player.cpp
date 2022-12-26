@@ -1,5 +1,4 @@
 #include "inc/Player.h"
-#include <iostream>
 //Return Sprite
 Sprite Player::getSprite()
 {
