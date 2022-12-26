@@ -8,15 +8,18 @@ class Animation {
     //Private
     float duration;    
     float frameTime;
+    float ellapsedTime;
     int currentFrame;
+    Vector2f a_frame;
     int numFrames;
   public:
     //Constructor
     Animation(float duration, int numFrames):  
     duration(duration),
     numFrames(numFrames),
-    frameTime(duration/numFrames)
+    frameTime(duration/numFrames),
+    ellapsedTime(0.0)
     { reset(); };
     void reset();
-    void updateFrame(float dt);
+    int updateFrame(int spriteWidth, float dt);
 };

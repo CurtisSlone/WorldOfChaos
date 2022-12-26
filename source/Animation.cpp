@@ -1,14 +1,24 @@
 #include "inc/Animation.h"
-
+#include <iostream>
 //Reset
 void Animation::reset ()
 {
     currentFrame = 0;
-    frameTime = 0;
 }
 //Update
-void Animation::updateFrame(float dt)
+int Animation::updateFrame(int spriteWidth, float dt)
 {
-
+    ellapsedTime+=dt;
+    bool timetruth = ellapsedTime > frameTime;
+    if(ellapsedTime>=frameTime)
+    {
+        if(currentFrame>=(numFrames-1))
+        {
+            reset();
+        }
+        currentFrame++;
+        ellapsedTime=0;
+    }
+    return currentFrame*spriteWidth;
 }
 

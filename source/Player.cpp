@@ -1,22 +1,17 @@
 #include "inc/Player.h"
-
+#include <iostream>
 //Return Sprite
 Sprite Player::getSprite()
 {
     return p_sprite;
 }
 
-	// p_sprite.setPosition(p_sprite.getPosition().x - 4,p_sprite.getPosition().y);
-	
-
-Vector2f Player::getPosition()
-{
-	return m_position;
-}
-
 // Move Char
 void Player::move(int dir, float dt)
 {
+	m_frame.y=(dir*65);
+	m_frame.x = animate.updateFrame(m_size.y,dt);
+	p_sprite.setTextureRect(IntRect(m_frame,m_size));
 	switch(dir)
 	{
 		case 8:
