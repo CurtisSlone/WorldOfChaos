@@ -6,12 +6,17 @@ using namespace sf;
 class Animation {
   private:
     //Private
-    std::vector<IntRect> currentSequence;
-    float duration;
+    float duration;    
+    float frameTime;
+    int currentFrame;
+    int numFrames;
   public:
     //Constructor
-    Animation(std::vector<IntRect>& frames, float duration): currentSequence(frames), duration(duration) { reset(); };
+    Animation(float duration, int numFrames):  
+    duration(duration),
+    numFrames(numFrames),
+    frameTime(duration/numFrames)
+    { reset(); };
     void reset();
     void updateFrame(float dt);
-    IntRect getCurrentFrame();
 };

@@ -13,77 +13,30 @@ class Player
         Sprite p_sprite;
         //Player Position
         Vector2f m_position;
-        //Is Player Moving
-        bool m_Moving;
-        //Player direction
-        bool m_UpPressed;
-        bool m_DownPressed;
-        bool m_LeftPressed;
-        bool m_RightPressed;
-        //Animation Vectors
-        std::vector<IntRect> walkingRight {
-            {0,715,65,65},
-            {65,715,65,65},
-            {130,715,65,65},
-            {195,715,65,65},
-            {250,715,65,65},
-            {315,715,65,65},
-            {380,715,65,65},
-            {445,715,65,65},
-            {510,715,65,65}
-        };
-        std::vector<IntRect> walkingLeft {
-            {0,585,65,65},
-            {65,585,65,65},
-            {130,585,65,65},
-            {195,585,65,65},
-            {250,585,65,65},
-            {315,585,65,65},
-            {380,585,65,65},
-            {445,585,65,65},
-            {510,585,65,65}
-        };
-        std::vector<IntRect> walkingUp {
-            {0,520,65,65},
-            {65,520,65,65},
-            {130,520,65,65},
-            {195,520,65,65},
-            {250,520,65,65},
-            {315,520,65,65},
-            {380,520,65,65},
-            {445,520,65,65},
-            {510,520,65,65}
-        };
-        std::vector<IntRect> walkingDown {
-            {0,650,65,65},
-            {65,650,65,65},
-            {130,650,65,65},
-            {195,650,65,65},
-            {250,650,65,65},
-            {315,650,65,65},
-            {380,650,65,65},
-            {445,650,65,65},
-            {510,650,65,65}
-
-        };
+        // Intrect x,y,size
+        Vector2i m_frame;
+        Vector2i m_size;
+        //Curent Animation Frame
+        IntRect m_currentFrame;
+        //Player Animation Sequence
+        Animation animate;
         
     public:
-        Player(Vector2f resolution);
+        Player(Vector2f resolution) :
+            m_size(Vector2i(65,65)),
+            m_frame(Vector2i(0,650)),
+            m_currentFrame(IntRect(m_frame,m_size)),
+            animate(9,9),
+            m_position(Vector2f(resolution.x/2,resolution.y/2))
+            {
+                p_texture.loadFromFile("./graphics/spritesheet.png");
+                p_sprite.setTexture(p_texture);
+	            p_sprite.setTextureRect(m_currentFrame);
+	            p_sprite.setPosition(m_position);
+            };
         //Pass sprite to main
-        Sprite getSprite();
-
-        // The next four functions move the player
-        void moveLeft(float dt);
-        void moveRight(float dt);
-        void moveUp(float dt);
-        void moveDown(float dt);
-
-        // Stop the player moving in a specific direction
-        void stopLeft();
-        void stopRight();
-        void stopUp();
-        void stopDown();
-        //Return Position of Player
         Vector2f getPosition();
+        Sprite getSprite();
+        void move(int dir, float dt);
 
 };

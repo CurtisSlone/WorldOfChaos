@@ -19,7 +19,7 @@ int main()
     float topBorder = (resolution.y*.2);
     float rightBorder = (resolution.x - (resolution.x*.2));
     float leftBorder = (resolution.x*.2);
-
+    
     //Mouse world coordinates
     Vector2f mouseWorld;
     //Mouse screen coordinates
@@ -33,12 +33,15 @@ int main()
     bgSprite.setTexture(bg);
     bgSprite.setPosition(0,0);
 
+    //Clock
+    Clock clock;
+    Time dt;
+
     //Player
     Player player(resolution);
 
     
-    //Clock
-    Clock clock;
+    
   
 
     //Main Loop
@@ -58,16 +61,16 @@ int main()
                     window.close();
                     break;
                 case Keyboard::Up:
-                    player.moveUp(dt.asSeconds());
+                    player.move(8,dt.asSeconds());
                     break;
                 case Keyboard::Down:
-                    player.moveDown(dt.asSeconds());
+                    player.move(10,dt.asSeconds());
                     break;
                 case Keyboard::Left:
-                    player.moveLeft(dt.asSeconds());
+                    player.move(9,dt.asSeconds());
                     break;
                 case Keyboard::Right:
-                    player.moveRight(dt.asSeconds());
+                    player.move(11,dt.asSeconds());
                     break;
 			}
         }

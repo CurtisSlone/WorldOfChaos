@@ -12,8 +12,3 @@ void Animation::updateFrame(float dt)
 
 }
 
-//return frame
-IntRect Animation::getCurrentFrame()
-{
-    return currentSequence[currentFrame];
-}
