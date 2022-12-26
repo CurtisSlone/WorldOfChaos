@@ -4,3 +4,5 @@
 bin/*
 #Ignore VSCode
 .vscode/*
+#Ignore all object files
+*.o
