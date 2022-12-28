@@ -59,43 +59,6 @@ int main()
 			}
         }
 
-    
-        //Conditional View Move
-        // Move view down
-        // if(player.getPosition().y >= bottomBorder)
-        // {
-        //     bottomBorder+=4;
-        //     topBorder+=4;
-        //     mainView.move(0,4.0f);
-        //     mainView.move(0,0);        
-            
-        // }
-        // // Move view up
-        // if(player.getPosition().y <= topBorder)
-        // {
-        //     topBorder-=4;
-        //     bottomBorder-=4;
-        //     mainView.move(0,-4.0f);
-        //     mainView.move(0,0); 
-
-        // }
-        // // Move view right
-        // if(player.getPosition().x == rightBorder)
-        // {
-        //     rightBorder+=4;
-        //     leftBorder+=4;
-        //     mainView.move(4.0f,0);
-        //     mainView.move(0,0); 
-        // }
-        // // Move view up
-        // if(player.getPosition().x == leftBorder)
-        // {
-        //     leftBorder-=4;
-        //     rightBorder-=4;
-        //     mainView.move(-4.0f,0);
-        //     mainView.move(0,0); 
-        // }
-
         // Draw
         window.clear();
         window.setView(gameView.getView());
