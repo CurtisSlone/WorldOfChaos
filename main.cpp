@@ -8,8 +8,8 @@ int main()
 {
     //Screen Resolution
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
     // Create Window
     VideoMode vm(resolution.x, resolution.y);
     RenderWindow window(vm, "World of Chaos",Style::Fullscreen);
@@ -20,6 +20,7 @@ int main()
 
     //Player
     Player player(resolution, window);
+
     //Draw Map
     Map map(player, window);
 

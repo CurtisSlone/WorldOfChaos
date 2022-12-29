@@ -77,4 +77,6 @@ class Player
         void refresh();
         //Receieve time delta
         void getDelta(float dt);
+        //Return View
+        View getView(){return playerView;};
 };
