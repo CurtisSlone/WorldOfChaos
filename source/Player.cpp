@@ -1,10 +1,4 @@
 #include "inc/Player.h"
-//Return Sprite
-Sprite Player::getSprite()
-{
-    return p_sprite;
-}
-
 // Move Char
 void Player::key(Event& e)
 {
@@ -19,7 +13,8 @@ void Player::key(Event& e)
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,-4);
 				playerView.move(0,-4.0f);
-				text.move(0,-4);
+				p_pos.move(0,-4);
+				v_bounds.move(0,-4);
 				break;
 			case Keyboard::Down:
 				m_frame.y=(Direction::DOWN*65);
@@ -27,7 +22,8 @@ void Player::key(Event& e)
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,4);
 				playerView.move(0,4.0f);
-				text.move(0,4);
+				p_pos.move(0,4);
+				v_bounds.move(0,4);
 				break;
 			case Keyboard::Left:
 				m_frame.y=(Direction::LEFT*65);
@@ -35,7 +31,8 @@ void Player::key(Event& e)
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(-4,0);
 				playerView.move(-4.0f,0);
-				text.move(-4,0);
+				p_pos.move(-4,0);
+				v_bounds.move(-4,0);
 				break;
 			case Keyboard::Right:
 				m_frame.y=(Direction::RIGHT*65);
@@ -43,19 +40,28 @@ void Player::key(Event& e)
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(4,0);
 				playerView.move(4.0f,0);
-				text.move(4,0);
+				p_pos.move(4,0);
+				v_bounds.move(4,0);
 				break;
 	}
 }
 
 void Player::refresh()
 {
-	std::stringstream ss;
-    ss << "Coords: " << playerView.getCenter().x << ", " << playerView.getCenter().y;
-    text.setString(ss.str());
+	
 	g_window.setView(playerView);
 	g_window.draw(p_sprite);
-	g_window.draw(text);
+	//Debug Text
+	//Player Position
+	std::stringstream p_ss;
+    p_ss << "p_pos: " << playerView.getCenter().x << ", " << playerView.getCenter().y;
+    p_pos.setString(p_ss.str());
+	g_window.draw(p_pos);
+	//View Bounds 
+	std::stringstream v_ss;
+    v_ss << "v_bounds: \n Top: " << (playerView.getCenter().y-(playerView.getSize().y/2)) << "\n Left: " << (playerView.getCenter().x-(playerView.getSize().x/2)) << "\n Bottom: " << (playerView.getCenter().y+(playerView.getSize().y/2)) << "\n Right: " << (playerView.getCenter().x+(playerView.getSize().x/2));
+    v_bounds.setString(v_ss.str());
+	g_window.draw(v_bounds);
 }
 
 void Player::getDelta(float dt)

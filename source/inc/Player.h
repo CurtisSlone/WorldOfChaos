@@ -33,10 +33,11 @@ class Player
         RenderWindow& g_window;
         //Delta time
         float p_dt;
-        //Text
-        //Font
+        //Font selection
         Font g_font;
-        Text text{};
+        //Debug text
+        Text p_pos{};
+        Text v_bounds{};
         
     public:
         Player(Vector2f& resolution, RenderWindow& window) :
@@ -48,23 +49,32 @@ class Player
             playerView(FloatRect(0,0,resolution.x,resolution.y)),
             g_window(window)
             {
+                // ERR check font load
                 if(!g_font.loadFromFile("./fonts/KOMIKAP_.ttf"))
                 {
                     //ERR
                     std::cout << "Fail";
                 }
+                // Player Information
                 p_texture.loadFromFile("./graphics/spritesheet.png");
                 p_sprite.setTexture(p_texture);
 	            p_sprite.setTextureRect(m_currentFrame);
 	            p_sprite.setPosition(m_position);
-                text.setFont(g_font);
-                text.setCharacterSize(50);
-                text.setFillColor(Color::Red);
-                text.setPosition(sf::Vector2f{ 100,100});
+                //Player Pos text
+                p_pos.setFont(g_font);
+                p_pos.setCharacterSize(50);
+                p_pos.setFillColor(Color::Red);
+                p_pos.setPosition(sf::Vector2f{100,100});
+                //View Bounds Text
+                v_bounds.setFont(g_font);
+                v_bounds.setCharacterSize(50);
+                v_bounds.setFillColor(Color::Red);
+                v_bounds.setPosition(sf::Vector2f{100,200});
             };
-        //Pass sprite to main
-        Sprite getSprite();
+        //Handle Keyboard events
         void key(Event& e);
+        // Refresh Window data
         void refresh();
+        //Receieve time delta
         void getDelta(float dt);
 };
