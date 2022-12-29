@@ -33,11 +33,15 @@ class Player
         RenderWindow& g_window;
         //Delta time
         float p_dt;
+        //Map Grid that player is in
+        Vector2i p_gridLoc;
+        //DEBUG
         //Font selection
         Font g_font;
         //Debug text
         Text p_pos{};
         Text v_bounds{};
+        Text m_grid{};
         
     public:
         Player(Vector2f& resolution, RenderWindow& window) :
@@ -45,9 +49,10 @@ class Player
             m_frame(Vector2i(0,650)),
             m_currentFrame(IntRect(m_frame,m_size)),
             animate(.01,9),
-            m_position(Vector2f(resolution.x/2,resolution.y/2)),
-            playerView(FloatRect(0,0,resolution.x,resolution.y)),
-            g_window(window)
+            m_position(Vector2f(810,5460)),
+            playerView(FloatRect(0,4920,resolution.x,resolution.y)),
+            g_window(window),
+            p_gridLoc(Vector2i((int)(playerView.getCenter().x/650),(int)(playerView.getCenter().y/650)))
             {
                 // ERR check font load
                 if(!g_font.loadFromFile("./fonts/KOMIKAP_.ttf"))
@@ -64,12 +69,17 @@ class Player
                 p_pos.setFont(g_font);
                 p_pos.setCharacterSize(50);
                 p_pos.setFillColor(Color::Red);
-                p_pos.setPosition(sf::Vector2f{100,100});
+                p_pos.setPosition(sf::Vector2f{100,5020});
                 //View Bounds Text
                 v_bounds.setFont(g_font);
                 v_bounds.setCharacterSize(50);
                 v_bounds.setFillColor(Color::Red);
-                v_bounds.setPosition(sf::Vector2f{100,200});
+                v_bounds.setPosition(sf::Vector2f{100,5220});
+                //View Bounds Text
+                m_grid.setFont(g_font);
+                m_grid.setCharacterSize(50);
+                m_grid.setFillColor(Color::Red);
+                m_grid.setPosition(sf::Vector2f{100,5800});
             };
         //Handle Keyboard events
         void key(Event& e);
@@ -79,4 +89,8 @@ class Player
         void getDelta(float dt);
         //Return View
         View getView(){return playerView;};
+        //Return current map grid coords
+        Vector2i getCurrGrid() {return p_gridLoc;};
+        //Return Player Map location
+        Vector2f getPos() {return m_position;};
 };
