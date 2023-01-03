@@ -12,7 +12,6 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,-4);
-				playerView.move(0,-4.0f);
 				p_pos.move(0,-4);
 				v_bounds.move(0,-4);
 				m_grid.move(0,-4);
@@ -22,7 +21,6 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,4);
-				playerView.move(0,4.0f);
 				p_pos.move(0,4);
 				v_bounds.move(0,4);
 				m_grid.move(0,4);
@@ -32,7 +30,6 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(-4,0);
-				playerView.move(-4.0f,0);
 				p_pos.move(-4,0);
 				v_bounds.move(-4,0);
 				m_grid.move(-4,0);
@@ -42,11 +39,15 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(4,0);
-				playerView.move(4.0f,0);
 				p_pos.move(4,0);
 				v_bounds.move(4,0);
 				m_grid.move(4,0);
 				break;
+	}
+	if(!container.intersects(p_sprite.getGlobalBounds()))
+	{
+		sf::Vector2f spritePos = p_sprite.getPosition();
+    	playerView.move(spritePos - playerView.getCenter());
 	}
 }
 

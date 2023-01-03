@@ -25,10 +25,10 @@ class Player
         Animation animate;
         //View
         View playerView;
-        float bottomBorder;
-        float topBorder;
-        float rightBorder;
-        float leftBorder;
+        sf::FloatRect container;
+        Vector2f viewSize;
+        Vector2f containerSize;
+        Vector2f containerPosition;
         //Window
         RenderWindow& g_window;
         //Delta time
@@ -49,8 +49,12 @@ class Player
             m_frame(Vector2i(0,650)),
             m_currentFrame(IntRect(m_frame,m_size)),
             animate(.01,9),
-            m_position(Vector2f(810,5460)),
             playerView(FloatRect(0,4920,resolution.x,resolution.y)),
+            m_position(playerView.getCenter()),
+            viewSize(playerView.getSize()),
+            containerSize(viewSize.x,viewSize.y),
+            containerPosition(playerView.getCenter().x - containerSize.x / 2, playerView.getCenter().y - containerSize.y / 2),
+            container(containerPosition, containerSize),
             g_window(window),
             p_gridLoc(Vector2i((int)(playerView.getCenter().x/650),(int)(playerView.getCenter().y/650)))
             {
