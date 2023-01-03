@@ -46,7 +46,7 @@ class Player
             m_size(Vector2i(64,64)),
             m_frame(Vector2i(0,650)),
             m_currentFrame(IntRect(m_frame,m_size)),
-            animate(.01,9),
+            animate(.05,9),
             playerView(FloatRect(0,4920,resolution.x,resolution.y)),
             g_window(window),
             containerSize(Vector2f(playerView.getSize().x*.8,playerView.getSize().y*.8))
@@ -64,21 +64,6 @@ class Player
 	            p_sprite.setPosition(playerView.getCenter());
                 //Get Current Grid
                  p_gridLoc =Vector2i((int)(p_sprite.getPosition().x/650),(int)(p_sprite.getPosition().y/650));
-                //Player Pos text
-                p_pos.setFont(g_font);
-                p_pos.setCharacterSize(50);
-                p_pos.setFillColor(Color::Red);
-                p_pos.setPosition(sf::Vector2f{100,5020});
-                //View Bounds Text
-                v_bounds.setFont(g_font);
-                v_bounds.setCharacterSize(50);
-                v_bounds.setFillColor(Color::Red);
-                v_bounds.setPosition(sf::Vector2f{100,5220});
-                //View Bounds Text
-                m_grid.setFont(g_font);
-                m_grid.setCharacterSize(50);
-                m_grid.setFillColor(Color::Red);
-                m_grid.setPosition(sf::Vector2f{100,5800});
                 
             };
         //Handle Keyboard events

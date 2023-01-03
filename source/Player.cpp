@@ -30,8 +30,6 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(4,0);
-
-				
 				break;
 	}
 	
@@ -40,37 +38,18 @@ void Player::key(Event& e)
 void Player::refresh()
 {
 	if(
-		(p_sprite.getPosition().x >= playerView.getCenter().x + containerSize.x/2) ||
-		(p_sprite.getPosition().x <= playerView.getCenter().x - containerSize.x/2) ||
-		(p_sprite.getPosition().y >= playerView.getCenter().y + containerSize.y/2) ||
-		(p_sprite.getPosition().y <= playerView.getCenter().y - containerSize.y/2)
+		(p_sprite.getPosition().x >= playerView.getCenter().x + containerSize.x/2) && (p_sprite.getPosition().x < 6050) ||
+		(p_sprite.getPosition().x <= playerView.getCenter().x - containerSize.x/2) && (p_sprite.getPosition().x > 198) ||
+		(p_sprite.getPosition().y >= playerView.getCenter().y + containerSize.y/2) && (p_sprite.getPosition().y < 5800)||
+		(p_sprite.getPosition().y <= playerView.getCenter().y - containerSize.y/2) && (p_sprite.getPosition().y > 150)
 	)
 	{
-		playerView.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
-		p_pos.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
-		v_bounds.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
-		m_grid.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
+		playerView.move((p_sprite.getPosition() - playerView.getCenter()) * 0.0175f);
 	}
 	
 	p_gridLoc = Vector2i((int)(playerView.getCenter().x/650),(int)(playerView.getCenter().y/650));
 	g_window.setView(playerView);
 	g_window.draw(p_sprite);
-	//Debug Text
-	//Player Position
-	std::stringstream p_ss;
-    p_ss << "p_pos: " << p_sprite.getPosition().x << ", " << p_sprite.getPosition().y;
-    p_pos.setString(p_ss.str());
-	g_window.draw(p_pos);
-	//View Bounds 
-	std::stringstream v_ss;
-    v_ss << "v_bounds: \n Top: " << (playerView.getCenter().y-(playerView.getSize().y/2)) << "\n Left: " << (playerView.getCenter().x-(playerView.getSize().x/2)) << "\n Bottom: " << (playerView.getCenter().y+(playerView.getSize().y/2)) << "\n Right: " << (playerView.getCenter().x+(playerView.getSize().x/2));
-    v_bounds.setString(v_ss.str());
-	g_window.draw(v_bounds);
-	//Current Map grid
-	std::stringstream g_ss;
-	g_ss << "m_grid: " << p_gridLoc.x << ", " << p_gridLoc.y;
-    m_grid.setString(g_ss.str());
-	g_window.draw(m_grid);
 }	
 
 void Player::getDelta(float dt)
