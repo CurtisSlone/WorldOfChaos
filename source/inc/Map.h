@@ -65,7 +65,6 @@ class Map
             {
                 int i = 0;
                 s = "graphics/images/" + std::to_string(c) + "_" + std::to_string(r) +".gif";
-                std::cout << s << "\n";
                 t.loadFromFile(s);
                 m_sprite.at(i).setTexture(t);
                 m_sprite.at(i).setPosition(Vector2f((c*650),(r*650)));

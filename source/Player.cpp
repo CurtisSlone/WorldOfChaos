@@ -12,55 +12,53 @@ void Player::key(Event& e)
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,-4);
-				p_pos.move(0,-4);
-				v_bounds.move(0,-4);
-				m_grid.move(0,-4);
 				break;
 			case Keyboard::Down:
 				m_frame.y=(Direction::DOWN*65);
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(0,4);
-				p_pos.move(0,4);
-				v_bounds.move(0,4);
-				m_grid.move(0,4);
 				break;
 			case Keyboard::Left:
 				m_frame.y=(Direction::LEFT*65);
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(-4,0);
-				p_pos.move(-4,0);
-				v_bounds.move(-4,0);
-				m_grid.move(-4,0);
 				break;
 			case Keyboard::Right:
 				m_frame.y=(Direction::RIGHT*65);
 				m_frame.x = animate.updateFrame(m_size.y,p_dt);
 				p_sprite.setTextureRect(IntRect(m_frame,m_size));
 				p_sprite.move(4,0);
-				p_pos.move(4,0);
-				v_bounds.move(4,0);
-				m_grid.move(4,0);
+
+				
 				break;
 	}
-	if(!container.intersects(p_sprite.getGlobalBounds()))
-	{
-		sf::Vector2f spritePos = p_sprite.getPosition();
-    	playerView.move(spritePos - playerView.getCenter());
-	}
+	
 }
 
 void Player::refresh()
 {
-	m_position = playerView.getCenter();
+	if(
+		(p_sprite.getPosition().x >= playerView.getCenter().x + containerSize.x/2) ||
+		(p_sprite.getPosition().x <= playerView.getCenter().x - containerSize.x/2) ||
+		(p_sprite.getPosition().y >= playerView.getCenter().y + containerSize.y/2) ||
+		(p_sprite.getPosition().y <= playerView.getCenter().y - containerSize.y/2)
+	)
+	{
+		playerView.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
+		p_pos.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
+		v_bounds.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
+		m_grid.move((p_sprite.getPosition() - playerView.getCenter())*0.1f);
+	}
+	
 	p_gridLoc = Vector2i((int)(playerView.getCenter().x/650),(int)(playerView.getCenter().y/650));
 	g_window.setView(playerView);
 	g_window.draw(p_sprite);
 	//Debug Text
 	//Player Position
 	std::stringstream p_ss;
-    p_ss << "p_pos: " << m_position.x << ", " << m_position.y;
+    p_ss << "p_pos: " << p_sprite.getPosition().x << ", " << p_sprite.getPosition().y;
     p_pos.setString(p_ss.str());
 	g_window.draw(p_pos);
 	//View Bounds 

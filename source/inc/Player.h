@@ -14,8 +14,6 @@ class Player
         //Player Texture & Sprite
         Texture p_texture;
         Sprite p_sprite;
-        //Player Position
-        Vector2f m_position;
         // Intrect x,y,size
         Vector2i m_frame;
         Vector2i m_size;
@@ -25,10 +23,10 @@ class Player
         Animation animate;
         //View
         View playerView;
-        sf::FloatRect container;
-        Vector2f viewSize;
+        FloatRect container;
         Vector2f containerSize;
-        Vector2f containerPosition;
+
+        
         //Window
         RenderWindow& g_window;
         //Delta time
@@ -50,13 +48,8 @@ class Player
             m_currentFrame(IntRect(m_frame,m_size)),
             animate(.01,9),
             playerView(FloatRect(0,4920,resolution.x,resolution.y)),
-            m_position(playerView.getCenter()),
-            viewSize(playerView.getSize()),
-            containerSize(viewSize.x,viewSize.y),
-            containerPosition(playerView.getCenter().x - containerSize.x / 2, playerView.getCenter().y - containerSize.y / 2),
-            container(containerPosition, containerSize),
             g_window(window),
-            p_gridLoc(Vector2i((int)(playerView.getCenter().x/650),(int)(playerView.getCenter().y/650)))
+            containerSize(Vector2f(playerView.getSize().x*.8,playerView.getSize().y*.8))
             {
                 // ERR check font load
                 if(!g_font.loadFromFile("./fonts/KOMIKAP_.ttf"))
@@ -68,7 +61,9 @@ class Player
                 p_texture.loadFromFile("./graphics/spritesheet.png");
                 p_sprite.setTexture(p_texture);
 	            p_sprite.setTextureRect(m_currentFrame);
-	            p_sprite.setPosition(m_position);
+	            p_sprite.setPosition(playerView.getCenter());
+                //Get Current Grid
+                 p_gridLoc =Vector2i((int)(p_sprite.getPosition().x/650),(int)(p_sprite.getPosition().y/650));
                 //Player Pos text
                 p_pos.setFont(g_font);
                 p_pos.setCharacterSize(50);
@@ -84,6 +79,7 @@ class Player
                 m_grid.setCharacterSize(50);
                 m_grid.setFillColor(Color::Red);
                 m_grid.setPosition(sf::Vector2f{100,5800});
+                
             };
         //Handle Keyboard events
         void key(Event& e);
@@ -95,6 +91,4 @@ class Player
         View getView(){return playerView;};
         //Return current map grid coords
         Vector2i getCurrGrid() {return p_gridLoc;};
-        //Return Player Map location
-        Vector2f getPos() {return m_position;};
 };
